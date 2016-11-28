@@ -1,0 +1,50 @@
+Name: Ziling Fan
+
+Ethics Statement: Other than anything noted in the disclosures
+below, the code submitted is of my design and my design alone. 
+I received no help nor used any references, resources, and had no
+discussion with other classmates. I understand the Univeristy 
+Policy concerning ethics and understand that violating this 
+policy will result in drastic repercussions. 
+
+Disclosures: Please note any discussions, use of supplemental
+resources, use of pre-existing code including programming language
+libraries. If you have nothing to disclose, please type "no 
+disclosures".
+
+************************************
+
+reference book: Introduction to Algorithms 3rd Edition by Clifford Stein
+
+I discussed my idea for implementing the data structure and algorithms with my friends majoring computer science.They taught me very good method of organizing code and helped me do debugging a little bit.**************************************
+
+Summary of your design and implementation: Describe the design of
+your structure. Discuss your choice of m (the order of the B-tree) 
+both practically and theoretically. 
+
+
+
+**************************************************
+For the implementing B tree, I chose design scheme2 in which I store values in internal nodes. 
+I used two arrays storing words and its children pointers respectively.
+In order to tack the word frequency, I designed the pair structure to store both the word and its frequency counting(in one of arrays mentioned above).
+For the linked list, I just did the design based on the requirement of the project.
+
+Discussion of M
+Theoretically traversing and searching  time complexity should be m*logmn. n is the total number of words which is fixed. Therefore, the min of the formula can be achieved when m=2(approximately).
+In my actual experiment, the min of run time can be achieved when m=10.(4,10 and a couple of other m values are shown in the program. Some other values around 10 have also been tried but not shown in the program). Possible explanation: 2 is only the theoretical value. There may be some memory delay which can be decreased by deceasing the number of memory visit. One method of decreasing memory visit is to increasing m by decreasing the height of the tree. However, rising m leads to increasing searching time in a certain node. Therefore, we have to find a balance. The experiment results show that m=10 may be an optimal choice. 
+*****************************************************
+
+Notes to the grader (describe the state of your program. Is it
+fully functional? Do some operations work while others do not?):
+
+**************************************
+call setChildrenNumber function to set up different values for M.
+I set up a constraint for M which must be positive even number.(For the clearness of calculation of minimum value of children and keys )
+***************************************
+
+Compliation instructions (Be Precise -- does the submission 
+compile on the server?): 
+
+<insert here>
+
