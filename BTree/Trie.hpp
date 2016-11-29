@@ -15,23 +15,38 @@ private:
     class TrieNode {
     public:
         TrieNode* next[26];
+        int count;
         bool isWord;
         TrieNode() {
+            count = 0;
             memset(next, NULL, sizeof(next));
             isWord = false;
         }
     };
-    TrieNode* root;
+    TrieNode* _root;
 public:
+    string val;
+    bool isWord;
+    int count;
+    bool isUsed;
     Trie() {
-        root = new TrieNode();
+        val = "";
+        count = 0;
+        isWord = false;
+        _root = new TrieNode();
     }
     void insert(string word, int start);
-    bool search(string word, int start);
+    int search(string word, int start);
     void remove(string word, int start);
     void removeNode(string word, int index, TrieNode* node);
     void clear();
-    void recursiveClear(Trie* root);
+    void recursiveClear(TrieNode* node);
+    void resetFrequency();
+    void recursiveReset(TrieNode* node);
+    ~Trie() {
+        clear();
+        _root = NULL;
+    }
 };
 
 #endif /* Trie_hpp */

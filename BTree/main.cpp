@@ -11,12 +11,15 @@
 #include "BTree.hpp"
 #include "Hash.hpp"
 int main(int argc, const char * argv[]) {
+    string inputFilePath = "/Users/roneil/Project/Hash/Files/inputFile2.txt";
+    string dictionaryFilePath = "/Users/roneil/Project/Hash/Files/dictionaryFile.txt";
+    string removalFilePath = "/Users/roneil/Project/Hash/Files/removalFile.txt";
 //    string inputFilePath = argv[1];
 //    string dictionaryFilePath = argv[2];
 //    string removalFilePath = argv[3];
 //
-//    BTree tree(dictionaryFilePath);
-//    
+    BTree tree(dictionaryFilePath);
+//
 //
 //    cout<<"---------------- B Tree ----------------"<<endl;
 //    if (tree.empty()) {
@@ -24,18 +27,18 @@ int main(int argc, const char * argv[]) {
 //    } else{
 //        cout<<"\n---------------- file check before removal with M=4 ----------------"<<endl;
 //        tree.fileCheck(inputFilePath);
-//        tree.setChildrenNumber(10);
+        tree.setChildrenNumber(10);
 //        cout<<"\n----- file check before removal with M=10 which is my choice after experiment -----"<<endl;
-//        tree.fileCheck(inputFilePath);
+        tree.fileCheck(inputFilePath);
 //        tree.setChildrenNumber(50);
 //        cout<<"\n----- file check before removal with M=50(experimental value)  -----"<<endl;
 //        tree.fileCheck(inputFilePath);
 //        tree.setChildrenNumber(100);
 //        cout<<"\n----- file check before removal with M=100(experimental value -----"<<endl;
 //        tree.fileCheck(inputFilePath);
-//        tree.removeAll(removalFilePath);
-//        cout<<"\n---------------- file check after removal ----------------"<<endl;
-//        tree.fileCheck(inputFilePath);
+        tree.removeAll(removalFilePath);
+        cout<<"\n---------------- file check after removal ----------------"<<endl;
+        tree.fileCheck(inputFilePath);
 //    }
 //    
 //    cout<<"\n\n---------------- link list ----------------\n"<<endl;
@@ -50,7 +53,15 @@ int main(int argc, const char * argv[]) {
 //        cout<<"\n---------------- file check after removal ----------------"<<endl;
 //        list.fileCheck(inputFilePath);
 //    }
-    Hash h("");
+    cout<<"\n---------------- Hash ----------------"<<endl;
+    Hash h(dictionaryFilePath);
+    h.fileCheck(inputFilePath);
+    h.removeAll(removalFilePath);
+    cout<<"\n---------------- Hash after removal ----------------"<<endl;
+    h.fileCheck(inputFilePath);
+    cout<<"\n-------------------------------"<<endl;
+    cout<<"key numbers: "<<h.countKey()<<endl;
+    
 //    string s[235886];
 //    ifstream inputData("/Users/roneil/Project/zlP3/Project3/BTree/Files/dictionaryFile.txt");
 //    string content((istreambuf_iterator<char>(inputData)),(istreambuf_iterator<char>()));

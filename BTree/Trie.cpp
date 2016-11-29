@@ -8,36 +8,48 @@
 
 #include "Trie.hpp"
 void Trie::insert(string word, int start) {
-    TrieNode* p = root;
-    for (int i = 0; i < word.length(); i++) {
-        if (p->next[word[i] - 'A'] == NULL) p->next[word[i] - 'A'] = new TrieNode();
-        p = p->next[word[i] - 'A'];
+    TrieNode* p = _root;
+    for (int i = start; i < word.length(); i++) {
+        int c = word[i] - 'A';
+        if (c > 25 || c < 0) return;
+        if (p->next[c] == NULL) p->next[c] = new TrieNode();
+        p = p->next[c];
     }
     p->isWord = true;
 }
 
-bool Trie::search(string word, int start) {
-    TrieNode* p = root;
+int Trie::search(string word, int start) {
+    if (start >= word.length()) return -1;
+    TrieNode* p = _root;
     for (int i = start; i < word.length(); i++) {
-        if (p->next[word[i] - 'A'] != NULL) p = p->next[word[i] - 'A'];
-        else return false;
+        int c = word[i] - 'A';
+        if (c > 25 || c < 0) return -1;
+        if (p->next[c] != NULL) p = p->next[c];
+        else return -1;
     }
-    return p != NULL && p->isWord;
+    if (p != NULL && p->isWord) {
+        p->count++;
+        return p->count;
+    }
+    return -1;
 }
 void Trie::remove(string word, int start) {
-    TrieNode* p = root;
+    TrieNode* p = _root;
     // check whether the node can be found
     for (int i = start; i < word.length(); i++) {
-        if (p->next[word[i] - 'A'] != NULL) {
-            p = p->next[word[i] - 'A'];
+        int c = word[i] - 'A';
+        if (c > 25 || c < 0) return;
+        if (p->next[c] != NULL) {
+            p = p->next[c];
         } else return; // not found
     }
     // if found, set isWord to false;
     if (p != NULL && p->isWord) {
         p->isWord = false;
+        p->count = 0;
     }
     // check whether the node can be delete
-    removeNode(word, start, root);
+    removeNode(word, start, _root);
 }
 void Trie::removeNode(string word, int index, TrieNode* node) {
     if (index == word.length()) return;
@@ -57,4 +69,26 @@ void Trie::removeNode(string word, int index, TrieNode* node) {
             node = NULL;
         }
     }
+}
+void Trie::resetFrequency() {
+    recursiveReset(_root);
+}
+void Trie::recursiveReset(TrieNode* node) {
+    if (node == NULL) return;
+    node->count = 0;
+    for (int i = 0; i < 26; i++) {
+        if (node->next[i]) recursiveReset(node->next[i]);
+    }
+}
+void Trie::clear() {
+    recursiveReset(_root);
+}
+void Trie::recursiveClear(TrieNode* node) {
+    if (node == NULL) return;
+    node->count = 0;
+    for (int i = 0; i < 26; i++) {
+        if (node->next[i]) recursiveReset(node->next[i]);
+    }
+    delete node;
+    node = NULL;
 }
